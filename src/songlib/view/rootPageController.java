@@ -116,8 +116,8 @@ public class rootPageController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Warning!");
-			alert.setHeaderText("Playlist is Empty.");
-			alert.setContentText("There are no more songs to delete. Good job.");
+			alert.setHeaderText("No Song Selected");
+			alert.setContentText("Please select a song in the playlist.");
 			
 			alert.showAndWait();
 		}
