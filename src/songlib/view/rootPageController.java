@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
@@ -12,13 +13,19 @@ import javafx.scene.control.TextField;
 import songlib.Main;
 import songlib.model.Song;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import javafx.event.ActionEvent;
+
 
 
 public class rootPageController {
 	
 	@FXML
-	private TableView<Song> songTable;
-	
+	private ListView<Song> listView;
+
+	/**
 	@FXML
 	private TableColumn<Song, String> titleColumn;
 	@FXML
@@ -27,28 +34,68 @@ public class rootPageController {
 	private TableColumn<Song, String> albumColumn;
 	@FXML
 	private TableColumn<Song, String> yearColumn;
+	*/
 	
 	@FXML
-	private Label titleLabel;
+	private TextField titleLabel;
 	@FXML
-	private Label artistLabel;
+	private TextField artistLabel;
 	@FXML
-	private Label albumLabel;
+	private TextField albumLabel;
 	@FXML
-	private Label yearLabel;
+	private TextField yearLabel;
 	
 	@FXML
 	private Button editButton;
 	
-	// This is the reference to the main application
 	
-	private Main mainApp;
+	
+	
+	@FXML
+	private TextField titleField;
+	@FXML
+	private TextField artistField;
+	@FXML
+	private TextField albumField;
+	@FXML
+	private TextField yearField;
+	
+	@FXML
+	private Button addButton;
+
+	
+	private ObservableList<Song> listViewData = FXCollections.observableArrayList();
+	
 	
 	/**
 	 * This constructor is called before the initialize() method.
 	 */
 	
 	public rootPageController(){
+		
+		listViewData.add(new Song("Blood Sweat & Tears","BTS","You Never Walk Alone","2017"));
+		listViewData.add(new Song("BOOMBAYAH","BlackPink","SQUARE TWO","2016"));
+		listViewData.add(new Song("Cheer Up","TWICE","PAGE TWO","2016"));
+    	listViewData.add(new Song("DOPE","BTS","The Most Beautiful Moments in Life","2016"));
+    	listViewData.add(new Song("FXXK IT","BIGBANG","MADE","2016"));
+    	listViewData.add(new Song("Hard Carry","GOT7","",""));
+    	listViewData.add(new Song("Heartbreaker","NCT 127","LIMITLESS - The 2nd Mini Album - EP","2017"));
+    	listViewData.add(new Song("I Don't Disappoint","Jay Park","Everything You Wanted","2016"));
+    	listViewData.add(new Song("HYDE","VIXX","",""));
+    	listViewData.add(new Song("Lie","Park Jimin","You Never Walk Alone","2017"));
+    	listViewData.add(new Song("LOSER","BIGBANG","MADE","2016"));
+    	listViewData.add(new Song("Me Like Yuh","Jay Park","Everything You Wanted","2016"));
+    	listViewData.add(new Song("Not Today","BTS","You Never Walk Alone","2017"));
+    	listViewData.add(new Song("PLAYING WITH FIRE","BlackPink","SQUARE TWO","2016"));
+    	listViewData.add(new Song("Pour Up (ft. Zico)","Dean","130 Mood: TRBL","2016"));
+    	listViewData.add(new Song("Save Me","BTS","The Most Beautiful Moments in Life","2016"));
+    	listViewData.add(new Song("Spring Day","BTS","You Never Walk Alone","2017"));
+    	listViewData.add(new Song("STAY","BlackPink","SQUARE TWO","2016"));
+    	listViewData.add(new Song("Stigma","Kim Taehyung","You Never Walk Alone","2017"));
+    	listViewData.add(new Song("Supplementary Story","BTS","You Never Walk Alone","2017"));
+    	listViewData.add(new Song("The Truth Is","Jay Park","Everything You Wanted","2016"));
+    	listViewData.add(new Song("Very, Very, Very","IOI","","2016"));
+    	listViewData.add(new Song("WHISTLE","BlackPink","SQUARE TWO","2016"));
 	}
 	
 	/**
@@ -58,28 +105,16 @@ public class rootPageController {
 	
 	@FXML
 	private void initialize(){
-		// Initializes song table with 4 columns
-		titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
-		artistColumn.setCellValueFactory(cellData -> cellData.getValue().artistProperty());
-		albumColumn.setCellValueFactory(cellData -> cellData.getValue().albumProperty());
-		yearColumn.setCellValueFactory(cellData -> cellData.getValue().yearProperty());
 		
 		// empty song details
 		
-		showSongDetails(null);
+		listView.setItems(listViewData);
 		
 		// Listener for user selection
 		// Show details when selected
 		
-		songTable.getSelectionModel().selectedItemProperty().addListener(
+		listView.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showSongDetails(newValue));
-	}
-	
-	public void setMainApp(Main mainApp){
-		this.mainApp = mainApp;
-		
-		songTable.setItems(mainApp.getSongData());
-		
 	}
 	
 	/**
@@ -101,20 +136,38 @@ public class rootPageController {
 		}
 	}
 	
-	/** 
-	 * Handler for Delete Function
-	 */
+	
+	@FXML
+	private void addSong(){
+		listViewData.add(new Song(titleField.getText(),artistField.getText(),albumField.getText(),yearField.getText()));
+
+	}
+	
+	@FXML
+	private void addCancel(){
+		titleField.setText("");
+		artistField.setText("");
+		albumField.setText("");
+		yearField.setText("");
+
+	}
+	
+	@FXML
+	private void editCancel(){
+		
+		int index = listView.getSelectionModel().getSelectedIndex();
+
+	}
 	
 	@FXML
 	private void deleteSong(){
-		int index = songTable.getSelectionModel().getSelectedIndex();
+		int index = listView.getSelectionModel().getSelectedIndex();
 		
 		if(index>=0){
-			songTable.getItems().remove(index);
+			listView.getItems().remove(index);
 		}else{
 			
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Warning!");
 			alert.setHeaderText("No Song Selected");
 			alert.setContentText("Please select a song in the playlist.");
@@ -124,6 +177,7 @@ public class rootPageController {
 		
 	}
 	
+
 	
 	
 	

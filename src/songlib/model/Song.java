@@ -81,4 +81,8 @@ public class Song {
 		return year;
 	}
 
+	@Override
+	public String toString() {
+		return this.getTitle();
+	}
 }
