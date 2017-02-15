@@ -115,6 +115,7 @@ public class rootPageController {
 		
 		listView.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showSongDetails(newValue));
+
 	}
 	
 	/**
@@ -182,12 +183,14 @@ public class rootPageController {
 	
 	@FXML
 	private void addCancel(){
+
 		titleField.setText("");
 		artistField.setText("");
 		albumField.setText("");
 		yearField.setText("");
 
 	}
+
 	
 	//Pass in the song to be edited
 /*	@FXML
