@@ -10,7 +10,7 @@ package songlib.model;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Song {
+public class Song implements Comparable<Song>{
 	
 	private final StringProperty title;
 	private final StringProperty artist;
@@ -32,6 +32,9 @@ public class Song {
 		this.year = new SimpleStringProperty(year);
 	}
 	
+	public Song(String title, String artist){
+		this(title,artist,null,null);
+	}
 	
 	public String getTitle(){
 		return title.get();
@@ -84,5 +87,27 @@ public class Song {
 	@Override
 	public String toString() {
 		return this.getTitle();
+	}
+	
+	public boolean equals(Object obj){
+		if(obj == null || !(obj instanceof Song)){
+			return false;
+		}
+		
+		Song other = (Song)obj;
+		if((other.getArtist().equalsIgnoreCase(this.artist.getValue())) && (other.getTitle().equalsIgnoreCase(this.title.getValue())))
+			return true;
+		else
+			return false;
+	}
+	
+	@Override
+	public int compareTo(Song other) {
+		int nameCompared = this.title.getValue().compareToIgnoreCase(other.getTitle());
+		if(nameCompared != 0)
+			return nameCompared;
+		else{
+			return this.artist.getValue().compareToIgnoreCase(other.getArtist());
+		}
 	}
 }

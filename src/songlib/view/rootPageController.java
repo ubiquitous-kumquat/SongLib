@@ -136,12 +136,49 @@ public class rootPageController {
 		}
 	}
 	
+	private int findSong(String name, String artist){
+		int i = 0;
+		int result = 0;
+		if(listViewData.size() == 0)
+			return -2;
+		Song curr = new Song(name,artist);
+		if(curr.compareTo(listViewData.get(0)) < 0) //need to add to front
+			return 0;
+		for(i = 0; i < listViewData.size(); i++){
+			result = curr.compareTo(listViewData.get(i));
+			if( result <= 0 )
+				return i;
+		}
+		return i;
+	}
 	
 	@FXML
-	private void addSong(){
-		listViewData.add(new Song(titleField.getText(),artistField.getText(),albumField.getText(),yearField.getText()));
-
+	private void addSong() throws Exception{
+		Song song = new Song(titleField.getText(),artistField.getText(),albumField.getText(),yearField.getText());
+		int index = findSong(song.getTitle(),song.getArtist());
+		if(index == -2) //first addition
+			listViewData.add(song);
+		else if(index == listViewData.size()){ //adding to end
+			if (listViewData.get(index-1).equals(song)) //song already exists
+				throw new IllegalArgumentException();
+			if(song.compareTo(listViewData.get(index-1)) > 0) //add behind last
+				listViewData.add(song);
+			else
+				listViewData.add(index-1,song);
+		}else{ //song doesn't exist, so adding
+			if(listViewData.get(index).equals(song)) //song already exists
+					throw new IllegalArgumentException();	
+			else
+				listViewData.add(index,song); //adding to list in proper index
+		}
+//		size++;
 	}
+	
+//	@FXML
+//	private void addSong(){
+//		listViewData.add(new Song(titleField.getText(),artistField.getText(),albumField.getText(),yearField.getText()));
+//
+//	}
 	
 	@FXML
 	private void addCancel(){
@@ -151,6 +188,21 @@ public class rootPageController {
 		yearField.setText("");
 
 	}
+	
+	//Pass in the song to be edited
+/*	@FXML
+	private void editSong(Song originalSong, Song newSong) throws Exception{
+		if(listViewData==null || listViewData.size() == 0)
+			return;
+		if(listViewData.size() == 1){
+			listViewData.remove(0);
+		}
+		int index = findSong(originalSong.getTitle(),originalSong.getArtist());
+		if(!(listViewData.get(index).equals(originalSong))) //song did not exist in list
+			throw new IllegalArgumentException();
+		listViewData.remove(index);
+		listViewData.addSong();
+	} */
 	
 	@FXML
 	private void editSong(){
