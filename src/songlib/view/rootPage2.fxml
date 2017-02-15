@@ -48,8 +48,8 @@
                   </GridPane>
                   <ButtonBar layoutX="132.0" layoutY="187.0" prefHeight="27.0" prefWidth="293.0" AnchorPane.bottomAnchor="344.0" AnchorPane.rightAnchor="7.0">
                     <buttons>
-                        <Button mnemonicParsing="false" onAction="#editCancel" text="Cancel" />
-                        <Button mnemonicParsing="false" text="Save" />
+                        <Button mnemonicParsing="false" text="Cancel" />
+                        <Button mnemonicParsing="false" onAction="#editSong" text="Save" />
                         <Button mnemonicParsing="false" onAction="#deleteSong" text="Delete" />
                     </buttons>
                   </ButtonBar>

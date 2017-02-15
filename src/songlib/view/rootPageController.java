@@ -153,9 +153,11 @@ public class rootPageController {
 	}
 	
 	@FXML
-	private void editCancel(){
+	private void editSong(){
 		
-		int index = listView.getSelectionModel().getSelectedIndex();
+		Song song = new Song(titleLabel.getText(),artistLabel.getText(),albumLabel.getText(),yearLabel.getText());
+		listViewData.set(listView.getSelectionModel().getSelectedIndex(), song);
+	
 
 	}
 	
