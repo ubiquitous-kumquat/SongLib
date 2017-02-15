@@ -3,6 +3,7 @@ package songlib.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ListView;
@@ -115,6 +116,8 @@ public class rootPageController {
 		
 		listView.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showSongDetails(newValue));
+		if(!listViewData.isEmpty())
+			listView.getSelectionModel().select(0);
 
 	}
 	
@@ -153,26 +156,30 @@ public class rootPageController {
 		return i;
 	}
 	
-	@FXML
-	private void addSong() throws Exception{
-		Song song = new Song(titleField.getText(),artistField.getText(),albumField.getText(),yearField.getText());
+	
+	private void addSong(Song song){
+//		Song song = new Song(titleField.getText(),artistField.getText(),albumField.getText(),yearField.getText());
+		if(song.getTitle().trim().length() <= 0 || song.getArtist().trim().length() <= 0){
+			illegalArgumentError(false);	
+			return;
+		}
 		int index = findSong(song.getTitle(),song.getArtist());
 		if(index == -2) //first addition
 			listViewData.add(song);
 		else if(index == listViewData.size()){ //adding to end
 			if (listViewData.get(index-1).equals(song)) //song already exists
-				throw new IllegalArgumentException();
+				illegalArgumentError(true);
 			if(song.compareTo(listViewData.get(index-1)) > 0) //add behind last
 				listViewData.add(song);
 			else
 				listViewData.add(index-1,song);
-		}else{ //song doesn't exist, so adding
+		}else{ //adding to somewhere that isn't the front or end
 			if(listViewData.get(index).equals(song)) //song already exists
-					throw new IllegalArgumentException();	
+				illegalArgumentError(true);	
 			else
 				listViewData.add(index,song); //adding to list in proper index
 		}
-//		size++;
+		listView.getSelectionModel().select(index);
 	}
 	
 //	@FXML
@@ -188,6 +195,12 @@ public class rootPageController {
 		artistField.setText("");
 		albumField.setText("");
 		yearField.setText("");
+
+	}
+	
+	@FXML
+	private void editCancel(){
+		showSongDetails(null);
 
 	}
 
@@ -210,18 +223,27 @@ public class rootPageController {
 	@FXML
 	private void editSong(){
 		
-		Song song = new Song(titleLabel.getText(),artistLabel.getText(),albumLabel.getText(),yearLabel.getText());
-		listViewData.set(listView.getSelectionModel().getSelectedIndex(), song);
+		Song editedSong = new Song(titleLabel.getText(),artistLabel.getText(),albumLabel.getText(),yearLabel.getText());
+		listViewData.set(listView.getSelectionModel().getSelectedIndex(), editedSong);
 	
 
 	}
 	
 	@FXML
 	private void deleteSong(){
+		if(!confirmation())
+			return;
 		int index = listView.getSelectionModel().getSelectedIndex();
 		
 		if(index>=0){
 			listView.getItems().remove(index);
+			if(listViewData.size() == index && listViewData.size() != 0){//the last thing was deleted
+				listView.getSelectionModel().select(index-1);
+			}else if(listViewData.size() == 0){//list is empty, don't select anything
+				listView.getSelectionModel().clearSelection();
+			}else{
+				listView.getSelectionModel().select(index);
+			}
 		}else{
 			
 			Alert alert = new Alert(AlertType.WARNING);
@@ -233,9 +255,54 @@ public class rootPageController {
 		}
 		
 	}
+	@FXML
+	private void edit(){
+		if(!confirmation())
+			return;
+//		Song selected = listViewData.get(listView.getSelectionModel().getSelectedIndex());
+//		int index = listView.getSelectionModel().getSelectedIndex();
+		Song song = new Song(titleLabel.getText(),artistLabel.getText(),albumLabel.getText(),yearLabel.getText());
+		if(listViewData.contains(song)){
+			illegalArgumentError(true);
+			listView.getSelectionModel().clearAndSelect(listView.getSelectionModel().getSelectedIndex());
+			return;
+		}
+		listViewData.remove(listView.getSelectionModel().getSelectedIndex());
+		addSong(song);
+	}
+	@FXML
+	private void add(){
+		if(!confirmation())
+			return;
+		Song song = new Song(titleField.getText(),artistField.getText(),albumField.getText(),yearField.getText());
+		addSong(song);
+	}
 	
-
+	private void illegalArgumentError(boolean duplicate){
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error Dialog");
+		alert.setHeaderText("An action requires further attention");
+		if(duplicate)
+			alert.setContentText("Song already exists in list. Please enter information for a song not already in list");
+		else
+			alert.setContentText("Please enter title and artist name, at the least.");
+		alert.showAndWait();
+	}
 	
+	private boolean confirmation(){
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation Dialog");
+		alert.setHeaderText("An action requires further attention");
+		alert.setContentText("Are you sure?");
+		
+		alert.showAndWait();
+		
+		if(alert.getResult() == ButtonType.OK)	//continue
+			return true;
+		else									//stop
+			return false;
+		
+	}
 	
 	
 }
