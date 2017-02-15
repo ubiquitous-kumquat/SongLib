@@ -304,5 +304,68 @@ public class rootPageController {
 		
 	}
 	
+/*	public static Grid readFile(String filepath) throws FileNotFoundException, IOException{
+		BufferedReader br = new BufferedReader(new FileReader(filepath));
+		String line = br.readLine();
+		String[] split = line.split(",");
+		Point startPoint = new Point(Integer.parseInt(split[1]),Integer.parseInt(split[0]));
+		line = br.readLine();
+		split = line.split(",");
+		Point goalPoint = new Point(Integer.parseInt(split[1]),Integer.parseInt(split[0]));
+		Point[] difficultTerrain = new Point[8];
+		for(int i = 0; i < 8; i++){
+			line = br.readLine();
+			split = line.split(",");
+			difficultTerrain[i] = new Point(Integer.parseInt(split[1]),Integer.parseInt(split[0]));
+		}
+		line = br.readLine();
+		String[] dimensions = line.split(",");
+		short rows = (short) Integer.parseInt(dimensions[0]);
+		short cols = (short) Integer.parseInt(dimensions[1]);
+		Box[][] grid = new Box[rows][cols];
+		int i = 0;
+
+		while ((line = br.readLine()) != null) {
+			int j = 0;
+			for(String s: line.split(",")){	
+				grid[i][j] = new Box(j, i, Grid.screen_width/cols, Grid.screen_height/rows);
+				switch(s.charAt(0)){
+				case '0':
+					grid[i][j].setTerrain(Terrain.BLOCKED_CELL);
+					break;
+				case '1':
+					grid[i][j].setTerrain(Terrain.UNBLOCKED_CELL);
+					break;
+				case '2':
+					grid[i][j].setTerrain(Terrain.PARTIALLY_BLOCKED_CELL);
+					break;
+				case 'a':
+					grid[i][j].setTerrain(Terrain.UNBLOCKED_HIGHWAY_CELL);	
+					grid[i][j].setHighway_index(Integer.parseInt(s.substring(1)));
+					break;
+				case 'b':
+					grid[i][j].setTerrain(Terrain.PARTIALLY_BLOCKED_HIGHWAY_CELL);
+					grid[i][j].setHighway_index(Integer.parseInt(s.substring(1)));
+					break;
+				default:
+					break;		
+				}
+				j++;
+			}
+			i++;
+		}
+		br.close();
+		return new Grid(grid,startPoint,goalPoint,difficultTerrain);
+	}
+
+	public static void writeFile(String filename, String bigString) throws FileNotFoundException, UnsupportedEncodingException{
+		PrintWriter writer;
+		writer = new PrintWriter(new File(".." + File.separator + "src" + File.separator + filename));
+		for(String s: bigString.split("\n")){
+			writer.println(s);
+		}
+		writer.close();
+	} */
+	
 	
 }
