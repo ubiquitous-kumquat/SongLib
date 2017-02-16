@@ -19,6 +19,14 @@ import javafx.collections.ObservableList;
 
 import javafx.event.ActionEvent;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.StringTokenizer;
 
 
 public class rootPageController {
@@ -50,7 +58,8 @@ public class rootPageController {
 	private Button editButton;
 	
 	
-	
+	@FXML
+	private TextField fileField;
 	
 	@FXML
 	private TextField titleField;
@@ -66,6 +75,7 @@ public class rootPageController {
 
 	
 	private ObservableList<Song> listViewData = FXCollections.observableArrayList();
+//	private ObservableList<Song> listViewData_IMPORT = FXCollections.observableArrayList();
 	
 	
 	/**
@@ -304,15 +314,25 @@ public class rootPageController {
 		
 	}
 	
-/*	public static Grid readFile(String filepath) throws FileNotFoundException, IOException{
+	public ObservableList<Song> readFile(String filepath) throws FileNotFoundException, IOException{
 		BufferedReader br = new BufferedReader(new FileReader(filepath));
-		String line = br.readLine();
+		ObservableList<Song> listViewData_IMPORT = FXCollections.observableArrayList();
+		
+		String line = "";
+		while((line = br.readLine()) != null){
+			String[] split = line.split(",");
+			listViewData_IMPORT.add(new Song(split[0],split[1],split[2],split[3])); 
+		}
+		return listViewData_IMPORT;
+		
+/*		String line = br.readLine();
 		String[] split = line.split(",");
-		Point startPoint = new Point(Integer.parseInt(split[1]),Integer.parseInt(split[0]));
+//		StringTokenizer songToken = new StringTokenizer(line,split.toString());
+//		Song startPoint = new Point(Integer.parseInt(split[1]),Integer.parseInt(split[0]));
 		line = br.readLine();
 		split = line.split(",");
-		Point goalPoint = new Point(Integer.parseInt(split[1]),Integer.parseInt(split[0]));
-		Point[] difficultTerrain = new Point[8];
+//		Point goalPoint = new Point(Integer.parseInt(split[1]),Integer.parseInt(split[0]));
+//		Point[] difficultTerrain = new Point[8];
 		for(int i = 0; i < 8; i++){
 			line = br.readLine();
 			split = line.split(",");
@@ -355,17 +375,53 @@ public class rootPageController {
 			i++;
 		}
 		br.close();
-		return new Grid(grid,startPoint,goalPoint,difficultTerrain);
-	}
+		return new Grid(grid,startPoint,goalPoint,difficultTerrain); */
+	} 
 
-	public static void writeFile(String filename, String bigString) throws FileNotFoundException, UnsupportedEncodingException{
+	@FXML
+	private void export(){
+		String file = fileField.getText();
+		String bigString = "";
+		for(int i = 0; i < listViewData.size(); i++){
+			bigString.concat("\"");
+			bigString.concat(listViewData.get(i).getTitle());
+			bigString.concat("\"");
+			bigString.concat(",");
+			bigString.concat("\"");
+			bigString.concat(listViewData.get(i).getArtist());
+			bigString.concat("\"");
+			bigString.concat(",");
+			bigString.concat("\"");
+			bigString.concat(listViewData.get(i).getAlbum());
+			bigString.concat("\"");
+			bigString.concat(",");
+			bigString.concat("\"");
+			bigString.concat(listViewData.get(i).getYear());
+			bigString.concat("\"");
+			bigString.concat("\n");
+		}
+		try {
+			writeFile(file,bigString);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			illegalArgumentError(false);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			illegalArgumentError(false);
+		}
+		
+	}
+	
+	private void writeFile(String filename, String bigString) throws FileNotFoundException, UnsupportedEncodingException{
 		PrintWriter writer;
 		writer = new PrintWriter(new File(".." + File.separator + "src" + File.separator + filename));
 		for(String s: bigString.split("\n")){
 			writer.println(s);
 		}
 		writer.close();
-	} */
+	} 
 	
 	
 }
