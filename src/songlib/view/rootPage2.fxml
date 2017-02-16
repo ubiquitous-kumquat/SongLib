@@ -18,12 +18,12 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <ListView fx:id="listView" prefHeight="558.0" prefWidth="492.0" />
+                  <ListView fx:id="listView" layoutX="-3.0" layoutY="-2.0" prefHeight="560.0" prefWidth="497.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="559.0" prefWidth="336.0">
                <children>
-                  <Label layoutX="89.0" layoutY="14.0" text="Track Details:" AnchorPane.leftAnchor="89.0" AnchorPane.topAnchor="14.0" />
+                  <Label layoutX="6.0" layoutY="14.0" text="♫ Track Details" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="14.0" />
                   <GridPane layoutX="8.0" layoutY="50.0" prefHeight="100.0" prefWidth="233.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="50.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="121.0" minWidth="10.0" prefWidth="74.72314453125" />
@@ -53,7 +53,7 @@
                         <Button mnemonicParsing="false" onAction="#deleteSong" text="Delete" />
                     </buttons>
                   </ButtonBar>
-                  <TitledPane animated="false" layoutX="-6.0" layoutY="198.0" prefHeight="367.0" prefWidth="322.0" text="New Song...">
+                  <TitledPane animated="false" collapsible="false" layoutX="-6.0" layoutY="198.0" prefHeight="367.0" prefWidth="322.0" text="+ New Song...">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="273.0" prefWidth="320.0">
                            <children>
@@ -85,7 +85,7 @@
                                     <Button mnemonicParsing="false" onAction="#add" text="Add" />
                                 </buttons>
                               </ButtonBar>
-                              <TitledPane animated="false" layoutX="-1.0" layoutY="181.0" prefHeight="159.0" prefWidth="322.0" text="Import / Export">
+                              <TitledPane animated="false" collapsible="false" layoutX="-1.0" layoutY="189.0" prefHeight="159.0" prefWidth="322.0" text="» Import / Export">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="106.0" prefWidth="320.0">
                                        <children>
@@ -93,8 +93,8 @@
                                           <Label layoutX="14.0" layoutY="33.0" text="filename" />
                                           <ButtonBar layoutX="107.0" layoutY="56.0" prefHeight="34.0" prefWidth="200.0">
                                             <buttons>
-                                              <Button mnemonicParsing="false" onAction ="#importList" text="Import" />
-                                                <Button mnemonicParsing="false" onAction ="#exportList" text="Export" />
+                                              <Button mnemonicParsing="false" onAction="#importList" text="Import" />
+                                                <Button mnemonicParsing="false" onAction="#exportList" text="Export" />
                                             </buttons>
                                           </ButtonBar>
                                        </children>
