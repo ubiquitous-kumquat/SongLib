@@ -89,7 +89,7 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="106.0" prefWidth="320.0">
                                        <children>
-                                          <TextField layoutX="94.0" layoutY="28.0" prefHeight="27.0" prefWidth="212.0" />
+                                          <TextField fx:id="fileField" layoutX="94.0" layoutY="28.0" prefHeight="27.0" prefWidth="212.0" />
                                           <Label layoutX="14.0" layoutY="33.0" text="filename" />
                                           <ButtonBar layoutX="107.0" layoutY="56.0" prefHeight="34.0" prefWidth="200.0">
                                             <buttons>
