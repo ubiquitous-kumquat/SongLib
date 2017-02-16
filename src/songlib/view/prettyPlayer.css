@@ -1,0 +1,19 @@
+.root{
+	-fx-font: oblique 9px "Georgia";
+	-fx-background-color: #fcfcfc;
+	-fx-base: #fcfcfc;
+}
+
+.background{
+	-fx-background-color: #fcfcfc;
+}
+
+.button{
+    -fx-border-color: #bbb;
+    -fx-background-color: white;
+
+}
+
+.split-pane {
+    -fx-padding: 1 0 0 0;
+}
