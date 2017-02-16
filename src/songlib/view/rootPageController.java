@@ -385,18 +385,19 @@ public class rootPageController {
 		PrintWriter writer;
 		File file = new File("src" + File.separator + filename+".txt");
 		
-		if(file.exists()){
-			System.out.println("File exists!");
-			System.out.println(file.getAbsolutePath());
-		}else{
-			System.out.println("File DOESN'T exists!");
-			System.out.println(new File("src"+ File.separator+filename+".txt").getAbsoluteFile());
-		}
 		writer = new PrintWriter(file);
 		for(String s: bigString.split("\n")){
 			writer.println(s);
 		}
 		writer.close();
+		
+		if(file.exists()){
+			System.out.println("File exists!");
+			System.out.println(file.getAbsolutePath());
+		}else{
+			System.out.println("File DOESN'T exists!");
+			System.out.println(file.getAbsolutePath());
+		}
 	} 
 	
 	
