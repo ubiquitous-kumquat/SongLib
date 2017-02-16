@@ -93,8 +93,8 @@
                                           <Label layoutX="14.0" layoutY="33.0" text="filename" />
                                           <ButtonBar layoutX="107.0" layoutY="56.0" prefHeight="34.0" prefWidth="200.0">
                                             <buttons>
-                                              <Button mnemonicParsing="false" text="Import" />
-                                                <Button mnemonicParsing="false" text="Export" />
+                                              <Button mnemonicParsing="false" onAction ="#importList" text="Import" />
+                                                <Button mnemonicParsing="false" onAction ="#exportList" text="Export" />
                                             </buttons>
                                           </ButtonBar>
                                        </children>

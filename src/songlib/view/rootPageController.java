@@ -326,24 +326,26 @@ public class rootPageController {
 	} 
 
 	@FXML
-
 	private void importList(){
 		String file = fileField.getText();
 		try {
-			readFile(file);
+			listViewData = readFile(file);
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			illegalArgumentError(false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			illegalArgumentError(false);
 		}
+		
 	}
-	
+
+
 	@FXML
-
 	private void exportList(){
-
 		String file = fileField.getText();
 		String bigString = "";
 		for(int i = 0; i < listViewData.size(); i++){
@@ -380,7 +382,8 @@ public class rootPageController {
 	
 	private void writeFile(String filename, String bigString) throws FileNotFoundException, UnsupportedEncodingException{
 		PrintWriter writer;
-		writer = new PrintWriter(new File(".." + File.separator + "src" + File.separator + filename));
+		File file = new File(".." + File.separator + "src" + File.separator + filename+".txt");
+		writer = new PrintWriter(file);
 		for(String s: bigString.split("\n")){
 			writer.println(s);
 		}
