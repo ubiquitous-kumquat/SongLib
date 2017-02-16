@@ -275,6 +275,17 @@ public class rootPageController {
 		alert.showAndWait();
 	}
 	
+	private void illegalFileError(boolean duplicate){
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error Dialog");
+		alert.setHeaderText("An action requires further attention");
+		if(duplicate)
+			alert.setContentText("File entered not found. Please enter correct information.");
+		else
+			alert.setContentText("IOException found.");
+		alert.showAndWait();
+	}
+	
 	private boolean confirmation(){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
@@ -322,12 +333,12 @@ public class rootPageController {
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			illegalArgumentError(false);
+//			e.printStackTrace();
+			illegalFileError(true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			illegalArgumentError(false);
+//			e.printStackTrace();
+			illegalFileError(false);
 		}
 		
 	}
@@ -360,12 +371,12 @@ public class rootPageController {
 			writeFile(file,bigString);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			illegalArgumentError(false);
+//			e.printStackTrace();
+			illegalFileError(true);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			illegalArgumentError(false);
+//			e.printStackTrace();
+			illegalFileError(false);
 		}
 		
 	}
@@ -376,12 +387,12 @@ public class rootPageController {
 		
 		if(file.exists()){
 			System.out.println("File exists!");
+			System.out.println(file.getAbsolutePath());
 		}else{
 			System.out.println("File DOESN'T exists!");
 			System.out.println(new File("src"+ File.separator+filename+".txt").getAbsoluteFile());
 		}
 		writer = new PrintWriter(file);
-		System.out.println(bigString);
 		for(String s: bigString.split("\n")){
 			writer.println(s);
 		}

@@ -20,7 +20,7 @@ import songlib.view.rootPageController;
 
 
 
-public class Main extends Application {
+public class SongLib extends Application {
 	
     private AnchorPane rootPage;
 	
@@ -30,7 +30,7 @@ public class Main extends Application {
 	       try {
 	            // Load root layout from fxml file.
 	            FXMLLoader loader = new FXMLLoader();
-	            loader.setLocation(Main.class.getResource("view/rootPage2.fxml"));
+	            loader.setLocation(SongLib.class.getResource("view/rootPage2.fxml"));
 	            rootPage = (AnchorPane) loader.load();
 
 	            // Show the scene containing the root layout.
