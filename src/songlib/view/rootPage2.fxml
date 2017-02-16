@@ -46,14 +46,14 @@
                         <TextField fx:id="yearLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
-                  <ButtonBar layoutX="132.0" layoutY="187.0" prefHeight="27.0" prefWidth="293.0" AnchorPane.bottomAnchor="344.0" AnchorPane.rightAnchor="7.0">
+                  <ButtonBar layoutX="9.0" layoutY="156.0" prefHeight="27.0" prefWidth="293.0" AnchorPane.bottomAnchor="375.0" AnchorPane.rightAnchor="7.0">
                     <buttons>
-                        <Button mnemonicParsing="false" onAction ="#editCancel" text="Cancel" />
+                        <Button mnemonicParsing="false" onAction="#editCancel" text="Cancel" />
                         <Button mnemonicParsing="false" onAction="#edit" text="Save" />
                         <Button mnemonicParsing="false" onAction="#deleteSong" text="Delete" />
                     </buttons>
                   </ButtonBar>
-                  <TitledPane animated="false" layoutX="-6.0" layoutY="266.0" prefHeight="299.0" prefWidth="322.0" text="New Song...">
+                  <TitledPane animated="false" layoutX="-6.0" layoutY="198.0" prefHeight="367.0" prefWidth="322.0" text="New Song...">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="273.0" prefWidth="320.0">
                            <children>
@@ -79,12 +79,28 @@
                                     <TextField fx:id="yearField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                  </children>
                               </GridPane>
-                              <ButtonBar layoutX="109.0" layoutY="164.0" prefHeight="40.0" prefWidth="200.0">
+                              <ButtonBar layoutX="109.0" layoutY="141.0" prefHeight="40.0" prefWidth="200.0">
                                 <buttons>
                                   <Button mnemonicParsing="false" onAction="#addCancel" text="Cancel" />
                                     <Button mnemonicParsing="false" onAction="#add" text="Add" />
                                 </buttons>
                               </ButtonBar>
+                              <TitledPane animated="false" layoutX="-1.0" layoutY="186.0" prefHeight="159.0" prefWidth="322.0" text="Import / Export">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="106.0" prefWidth="320.0">
+                                       <children>
+                                          <TextField layoutX="94.0" layoutY="28.0" prefHeight="27.0" prefWidth="212.0" />
+                                          <Label layoutX="14.0" layoutY="33.0" text="filename" />
+                                          <ButtonBar layoutX="107.0" layoutY="56.0" prefHeight="34.0" prefWidth="200.0">
+                                            <buttons>
+                                              <Button mnemonicParsing="false" text="Import" />
+                                                <Button mnemonicParsing="false" text="Export" />
+                                            </buttons>
+                                          </ButtonBar>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
                            </children>
                         </AnchorPane>
                     </content>
