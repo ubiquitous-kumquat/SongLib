@@ -83,29 +83,6 @@ public class rootPageController {
 	
 	public rootPageController(){
 		
-		listViewData.add(new Song("Blood Sweat & Tears","BTS","You Never Walk Alone","2017"));
-		listViewData.add(new Song("BOOMBAYAH","BlackPink","SQUARE TWO","2016"));
-		listViewData.add(new Song("Cheer Up","TWICE","PAGE TWO","2016"));
-    	listViewData.add(new Song("DOPE","BTS","The Most Beautiful Moments in Life","2016"));
-    	listViewData.add(new Song("FXXK IT","BIGBANG","MADE","2016"));
-    	listViewData.add(new Song("Hard Carry","GOT7","",""));
-    	listViewData.add(new Song("Heartbreaker","NCT 127","LIMITLESS - The 2nd Mini Album - EP","2017"));
-    	listViewData.add(new Song("I Don't Disappoint","Jay Park","Everything You Wanted","2016"));
-    	listViewData.add(new Song("HYDE","VIXX","",""));
-    	listViewData.add(new Song("Lie","Park Jimin","You Never Walk Alone","2017"));
-    	listViewData.add(new Song("LOSER","BIGBANG","MADE","2016"));
-    	listViewData.add(new Song("Me Like Yuh","Jay Park","Everything You Wanted","2016"));
-    	listViewData.add(new Song("Not Today","BTS","You Never Walk Alone","2017"));
-    	listViewData.add(new Song("PLAYING WITH FIRE","BlackPink","SQUARE TWO","2016"));
-    	listViewData.add(new Song("Pour Up (ft. Zico)","Dean","130 Mood: TRBL","2016"));
-    	listViewData.add(new Song("Save Me","BTS","The Most Beautiful Moments in Life","2016"));
-    	listViewData.add(new Song("Spring Day","BTS","You Never Walk Alone","2017"));
-    	listViewData.add(new Song("STAY","BlackPink","SQUARE TWO","2016"));
-    	listViewData.add(new Song("Stigma","Kim Taehyung","You Never Walk Alone","2017"));
-    	listViewData.add(new Song("Supplementary Story","BTS","You Never Walk Alone","2017"));
-    	listViewData.add(new Song("The Truth Is","Jay Park","Everything You Wanted","2016"));
-    	listViewData.add(new Song("Very, Very, Very","IOI","","2016"));
-    	listViewData.add(new Song("WHISTLE","BlackPink","SQUARE TWO","2016"));
 	}
 	
 	/**

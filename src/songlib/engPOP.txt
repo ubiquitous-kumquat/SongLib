@@ -1,8 +1,0 @@
-"Shape of You","Ed Sheeran","Shape of You - Single", "2017"
-"Castle on the Hill","Ed Sheeran","Castle on the Hill - Single","2017"
-"Scared To Be Lonely","Martin Garrix","",""
-"Undercover","Kehlani","","2017"
-"Gangsta","Kehlani","Suicide Squad: Album","2016"
-"Death of a Bachelor","Panic! At the Disco","Death of a Bachelor","2016"
-"Say You Won't Let Go","James Arthur","",""
-"Love Me Now","John Legend","",""
