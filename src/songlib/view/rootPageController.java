@@ -326,25 +326,25 @@ public class rootPageController {
 	} 
 
 	@FXML
-<<<<<<< HEAD
 	private void importList(){
 		String file = fileField.getText();
 		try {
-			readFile(file);
+			listViewData = readFile(file);
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			illegalArgumentError(false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			illegalArgumentError(false);
 		}
+		
 	}
 	
-	@FXML
-	private void export(){
-=======
+
 	private void exportList(){
->>>>>>> origin/master
 		String file = fileField.getText();
 		String bigString = "";
 		for(int i = 0; i < listViewData.size(); i++){
