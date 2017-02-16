@@ -320,7 +320,15 @@ public class rootPageController {
 		String line = "";
 		while((line = br.readLine()) != null){
 			String[] split = line.split(",");
-			listViewData_IMPORT.add(new Song(split[0],split[1],split[2],split[3])); 
+			String album = "";
+			String year = "";
+			if(split[2].length() > 2){
+				album = split[2].substring(1, split[2].length()-1);
+			}
+			if(split[3].length() > 2){
+				year = split[3].substring(1, split[3].length()-1);
+			}
+			listViewData_IMPORT.add(new Song(split[0].substring(1, split[0].length()-1),split[1].substring(1, split[1].length()-1),album,year)); 
 		}
 		return listViewData_IMPORT;
 	} 
@@ -352,6 +360,7 @@ public class rootPageController {
 	private void exportList(){
 		String file = fileField.getText();
 		String bigString = "";
+//		bigString.re
 		for(int i = 0; i < listViewData.size(); i++){
 			bigString+="\"";
 			bigString+=listViewData.get(i).getTitle();
