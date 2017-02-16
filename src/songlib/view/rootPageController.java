@@ -11,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 
-import songlib.Main;
 import songlib.model.Song;
 
 import javafx.collections.FXCollections;
@@ -379,7 +378,7 @@ public class rootPageController {
 	} 
 
 	@FXML
-	private void export(){
+	private void exportList(){
 		String file = fileField.getText();
 		String bigString = "";
 		for(int i = 0; i < listViewData.size(); i++){
