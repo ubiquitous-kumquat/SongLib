@@ -324,60 +324,22 @@ public class rootPageController {
 			listViewData_IMPORT.add(new Song(split[0],split[1],split[2],split[3])); 
 		}
 		return listViewData_IMPORT;
-		
-/*		String line = br.readLine();
-		String[] split = line.split(",");
-//		StringTokenizer songToken = new StringTokenizer(line,split.toString());
-//		Song startPoint = new Point(Integer.parseInt(split[1]),Integer.parseInt(split[0]));
-		line = br.readLine();
-		split = line.split(",");
-//		Point goalPoint = new Point(Integer.parseInt(split[1]),Integer.parseInt(split[0]));
-//		Point[] difficultTerrain = new Point[8];
-		for(int i = 0; i < 8; i++){
-			line = br.readLine();
-			split = line.split(",");
-			difficultTerrain[i] = new Point(Integer.parseInt(split[1]),Integer.parseInt(split[0]));
-		}
-		line = br.readLine();
-		String[] dimensions = line.split(",");
-		short rows = (short) Integer.parseInt(dimensions[0]);
-		short cols = (short) Integer.parseInt(dimensions[1]);
-		Box[][] grid = new Box[rows][cols];
-		int i = 0;
-
-		while ((line = br.readLine()) != null) {
-			int j = 0;
-			for(String s: line.split(",")){	
-				grid[i][j] = new Box(j, i, Grid.screen_width/cols, Grid.screen_height/rows);
-				switch(s.charAt(0)){
-				case '0':
-					grid[i][j].setTerrain(Terrain.BLOCKED_CELL);
-					break;
-				case '1':
-					grid[i][j].setTerrain(Terrain.UNBLOCKED_CELL);
-					break;
-				case '2':
-					grid[i][j].setTerrain(Terrain.PARTIALLY_BLOCKED_CELL);
-					break;
-				case 'a':
-					grid[i][j].setTerrain(Terrain.UNBLOCKED_HIGHWAY_CELL);	
-					grid[i][j].setHighway_index(Integer.parseInt(s.substring(1)));
-					break;
-				case 'b':
-					grid[i][j].setTerrain(Terrain.PARTIALLY_BLOCKED_HIGHWAY_CELL);
-					grid[i][j].setHighway_index(Integer.parseInt(s.substring(1)));
-					break;
-				default:
-					break;		
-				}
-				j++;
-			}
-			i++;
-		}
-		br.close();
-		return new Grid(grid,startPoint,goalPoint,difficultTerrain); */
 	} 
 
+	@FXML
+	private void importList(){
+		String file = fileField.getText();
+		try {
+			readFile(file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@FXML
 	private void export(){
 		String file = fileField.getText();
