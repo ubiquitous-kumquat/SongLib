@@ -327,9 +327,13 @@ public class rootPageController {
 
 	@FXML
 	private void importList(){
-		String file = fileField.getText();
+		String filename = fileField.getText();
+//		file = ".."+File.separator+"src"+ File.separator+file+".txt";
+		File file = new File("src" + File.separator + filename+".txt");
+		
 		try {
-			listViewData = readFile(file);
+			listViewData = readFile(file.getAbsolutePath());
+			initialize();
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -349,22 +353,22 @@ public class rootPageController {
 		String file = fileField.getText();
 		String bigString = "";
 		for(int i = 0; i < listViewData.size(); i++){
-			bigString.concat("\"");
-			bigString.concat(listViewData.get(i).getTitle());
-			bigString.concat("\"");
-			bigString.concat(",");
-			bigString.concat("\"");
-			bigString.concat(listViewData.get(i).getArtist());
-			bigString.concat("\"");
-			bigString.concat(",");
-			bigString.concat("\"");
-			bigString.concat(listViewData.get(i).getAlbum());
-			bigString.concat("\"");
-			bigString.concat(",");
-			bigString.concat("\"");
-			bigString.concat(listViewData.get(i).getYear());
-			bigString.concat("\"");
-			bigString.concat("\n");
+			bigString+="\"";
+			bigString+=listViewData.get(i).getTitle();
+			bigString+="\"";
+			bigString+=",";
+			bigString+="\"";
+			bigString+=listViewData.get(i).getArtist();
+			bigString+="\"";
+			bigString+=",";
+			bigString+="\"";
+			bigString+=listViewData.get(i).getAlbum();
+			bigString+="\"";
+			bigString+=",";
+			bigString+="\"";
+			bigString+=listViewData.get(i).getYear();
+			bigString+="\"";
+			bigString+="\n";
 		}
 		try {
 			writeFile(file,bigString);
@@ -382,8 +386,16 @@ public class rootPageController {
 	
 	private void writeFile(String filename, String bigString) throws FileNotFoundException, UnsupportedEncodingException{
 		PrintWriter writer;
-		File file = new File(".." + File.separator + "src" + File.separator + filename+".txt");
+		File file = new File("src" + File.separator + filename+".txt");
+		
+		if(file.exists()){
+			System.out.println("File exists!");
+		}else{
+			System.out.println("File DOESN'T exists!");
+			System.out.println(new File("src"+ File.separator+filename+".txt").getAbsoluteFile());
+		}
 		writer = new PrintWriter(file);
+		System.out.println(bigString);
 		for(String s: bigString.split("\n")){
 			writer.println(s);
 		}
