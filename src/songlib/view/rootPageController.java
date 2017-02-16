@@ -326,7 +326,7 @@ public class rootPageController {
 	} 
 
 	@FXML
-<<<<<<< HEAD
+
 	private void importList(){
 		String file = fileField.getText();
 		try {
@@ -341,10 +341,9 @@ public class rootPageController {
 	}
 	
 	@FXML
-	private void export(){
-=======
+
 	private void exportList(){
->>>>>>> origin/master
+
 		String file = fileField.getText();
 		String bigString = "";
 		for(int i = 0; i < listViewData.size(); i++){
