@@ -75,7 +75,7 @@ public class rootPageController {
 	
 	private ObservableList<Song> listViewData = FXCollections.observableArrayList();
 //	private ObservableList<Song> listViewData_IMPORT = FXCollections.observableArrayList();
-	
+	private boolean firstRun = true;
 	
 	/**
 	 * This constructor is called before the initialize() method.
@@ -94,7 +94,18 @@ public class rootPageController {
 	private void initialize(){
 		
 		// empty song details
-		
+		if(fileExists() && firstRun)
+			importList("list");
+		else
+			try {
+				writeFile("list","");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		listView.setItems(listViewData);
 		
 		// Listener for user selection
@@ -249,9 +260,13 @@ public class rootPageController {
 //		int index = listView.getSelectionModel().getSelectedIndex();
 		Song song = new Song(titleLabel.getText(),artistLabel.getText(),albumLabel.getText(),yearLabel.getText());
 		if(listViewData.contains(song)){
-			illegalArgumentError(true);
-			listView.getSelectionModel().clearAndSelect(listView.getSelectionModel().getSelectedIndex());
-			return;
+			if(listViewData.get(listView.getSelectionModel().getSelectedIndex()).equals(song)){
+				
+			}else{
+				illegalArgumentError(true);
+				listView.getSelectionModel().clearAndSelect(listView.getSelectionModel().getSelectedIndex());
+				return;
+			}
 		}
 		listViewData.remove(listView.getSelectionModel().getSelectedIndex());
 		addSong(song);
@@ -301,13 +316,15 @@ public class rootPageController {
 		
 	}
 	
-	public ObservableList<Song> readFile(String filepath) throws FileNotFoundException, IOException{
+	private ObservableList<Song> readFile(String filepath) throws FileNotFoundException, IOException{
 		BufferedReader br = new BufferedReader(new FileReader(filepath));
 		ObservableList<Song> listViewData_IMPORT = FXCollections.observableArrayList();
 		
 		String line = "";
 		while((line = br.readLine()) != null){
 			String[] split = line.split(",");
+			if(split.length == 1 && split[0].equalsIgnoreCase(""))
+				break;
 			String album = "";
 			String year = "";
 			if(split[2].length() > 2){
@@ -318,6 +335,7 @@ public class rootPageController {
 			}
 			listViewData_IMPORT.add(new Song(split[0].substring(1, split[0].length()-1),split[1].substring(1, split[1].length()-1),album,year)); 
 		}
+		br.close();
 		return listViewData_IMPORT;
 	} 
 
@@ -343,10 +361,76 @@ public class rootPageController {
 		
 	}
 
+	private void importList(String filename){
+		File file = new File("src" + File.separator + filename+".txt");
+		firstRun = false;
+		try {
+			listViewData = readFile(file.getAbsolutePath());
+//			initialize();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			illegalFileError(true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			illegalFileError(false);
+		}	
+	}
+	
+	private boolean fileExists(){
+		File file = new File("src" + File.separator +"list.txt");
+		if(file.exists() && !file.isDirectory())
+			return true;
+		return false;
+	}
+	
+	
+	public void stopAndSave(){
+		File file = new File("src" + File.separator +"list.txt");
+		file.delete();
+		exportList("list");
+	}
 
 	@FXML
 	private void exportList(){
 		String file = fileField.getText();
+		String bigString = "";
+//		bigString.re
+		for(int i = 0; i < listViewData.size(); i++){
+			bigString+="\"";
+			bigString+=listViewData.get(i).getTitle();
+			bigString+="\"";
+			bigString+=",";
+			bigString+="\"";
+			bigString+=listViewData.get(i).getArtist();
+			bigString+="\"";
+			bigString+=",";
+			bigString+="\"";
+			bigString+=listViewData.get(i).getAlbum();
+			bigString+="\"";
+			bigString+=",";
+			bigString+="\"";
+			bigString+=listViewData.get(i).getYear();
+			bigString+="\"";
+			bigString+="\n";
+		}
+		try {
+			writeFile(file,bigString);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			illegalFileError(true);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			illegalFileError(false);
+		}
+		
+	}
+	
+	private void exportList(String file){
 		String bigString = "";
 //		bigString.re
 		for(int i = 0; i < listViewData.size(); i++){
